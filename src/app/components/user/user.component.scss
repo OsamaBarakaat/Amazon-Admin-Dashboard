@@ -1,0 +1,165 @@
+#addNewUserBtn,#addNewUserBtn div{
+    // display: flex;
+    // justify-content: space-evenly;
+    margin: 20px;
+}
+.container{
+    margin-top: 30px;
+    padding: 0;
+}
+#searchh{
+  border-radius: 20px;
+}
+#searchIcon{
+    font-size: 15px;
+    display: inline;
+}
+#searchInput{
+  width: 40%;
+}
+#iconSort{
+  color: #ddd;
+}
+i{
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.table{
+  margin-top: 5%;
+}
+
+
+.details {
+    position: relative;
+  display: inline-block;
+  }
+  
+  .message {
+    position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 100px;
+  transform: translateX(-50%);
+  background-color:#333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  }
+  
+  .details:hover .message {
+    top: -50px;
+  opacity: 1;
+  visibility: visible;
+  }
+
+  .details2 {
+    position: relative;
+  display: inline-block;
+  }
+  
+  .message2 {
+    position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 100px;
+  transform: translateX(-50%);
+  background-color:#333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  }
+  
+  .details2:hover .message2 {
+    top: -50px;
+  opacity: 1;
+  visibility: visible;
+  }
+  h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .center {
+    text-align: center;
+  }
+  
+  // .pagination {
+  //   display: inline-block;
+  // }
+  
+  .pagination .row .col button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+  }
+  
+  .pagination .row .col button{
+    background-color: #fba904;
+    color: white;
+    border: 1px solid #fba904;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+
+  #i{
+    color: rgb(0, 172, 0);
+    font-weight: 500;
+  }
+  td{
+    font-weight: 600;
+    color: #333;
+  }
+  #aPagination{
+    cursor: pointer;
+  }
+  .btnd{
+    background-color: #232f3e;
+    color: #fff;
+  }
+
+  .iconSort {
+    position: relative;
+  display: inline-block;
+  }
+  
+  .message3 {
+    position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 100px;
+  transform: translateX(-50%);
+  background-color:#333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  }
+  
+  .iconSort:hover .message3 {
+    top: -50px;
+  opacity: 1;
+  visibility: visible;
+  }
+
+  #img{
+    border-radius: 50%;
+  }

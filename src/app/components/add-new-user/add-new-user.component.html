@@ -1,0 +1,303 @@
+<div class="container">
+  <div class="row" *ngIf="errMessage">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+      <div class="alert alert-danger" role="alert">
+        <div class="row">
+          <div class="col">{{ errMessage }}</div>
+          <div class="col"></div>
+          <div class="col">
+            <i class="fa-regular fa-circle-xmark" (click)="close()"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="successMessage">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+      <div class="alert alert-success" role="alert">
+        <div class="row">
+          <div class="col">{{ successMessage }}</div>
+          <div class="col"></div>
+          <div class="col">
+            <i class="fa-regular fa-circle-xmark" (click)="close()"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="myForm">
+    <form (ngSubmit)="upload()" [formGroup]="userFormGroup">
+      <div class="row">
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="" class="form-lable">User Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              [class.is-valid]="name?.valid"
+              [class.is-invalid]="name?.invalid"
+              [(ngModel)]="newUser.name"
+            />
+            <div
+              class="alert alert-danger"
+              [hidden]="name?.valid || name?.untouched"
+            >
+              <small *ngIf="name?.errors?.['required']"
+                >user name is required</small
+              >
+              <small *ngIf="name?.errors"
+                >user name must be atleast 3 letters</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="email" class="form-lable">user Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              formControlName="email"
+              [(ngModel)]="newUser.email"
+              [class.is-valid]="email?.valid"
+              [class.is-invalid]="email?.invalid"
+            />
+            <div
+              class="alert alert-danger"
+              [hidden]="email?.valid || email?.untouched"
+            >
+              <small *ngIf="email?.errors?.['required']"
+                >Email is required</small
+              >
+              <small *ngIf="email?.errors?.['pattern']"
+                >Email must have @ and (yahoo|gmail|outlook) and ends with
+                .com</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="role" class="form-lable">Role</label>
+            <select
+              name="role"
+              class="form-select"
+              id="role"
+              formControlName="role"
+              [class.is-valid]="role?.valid"
+              [class.is-invalid]="role?.invalid"
+              [(ngModel)]="newUser.role"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <option *ngFor="let role of roleList" [value]="role.name">
+                {{ role.name }}
+              </option>
+            </select>
+            <div
+              class="alert alert-danger"
+              [hidden]="role?.valid || role?.untouched"
+            >
+              <small *ngIf="role?.errors?.['required']">role is required</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="isActive" class="form-lable">isActive</label>
+            <select
+              name="isActive"
+              class="form-select"
+              id="isActive"
+              formControlName="isActive"
+              [class.is-valid]="isActive?.valid"
+              [class.is-invalid]="isActive?.invalid"
+              [(ngModel)]="newUser.isActive"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <option *ngFor="let active of aa" [value]="active.name">
+                {{ active.name }}
+              </option>
+            </select>
+            <div
+              class="alert alert-danger"
+              [hidden]="isActive?.valid || isActive?.untouched"
+            >
+              <small *ngIf="isActive?.errors?.['required']"
+                >isActive is required</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div formArrayName="phone">
+            <div
+              class="mb-3 ms-4"
+              *ngFor="let mobile of phone.controls; let i = index"
+            >
+              <label class="form-label" for="phone{{ i + 1 }}"
+                >Mobile No.</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="phone{{ i + 1 }}"
+                id="phone {{ i + 1 }}"
+                [formControlName]="i"
+              />
+
+              <button
+                class="btn btn-success m-3 d-inline-block"
+                (click)="addMobile()"
+                *ngIf="mobile.value && i == phone.controls.length - 1"
+              >
+                +
+              </button>
+              <button
+                class="btn btn-danger"
+                (click)="removeMobile(i)"
+                [hidden]="i == phone.controls.length - 1"
+              >
+                -
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div formGroupName="address">
+            Address:
+            <div class="mb-3 ms-2">
+              <label for="usrCity" class="form-label">city</label>
+              <input
+                type="text"
+                class="form-control"
+                name="city"
+                id="usrCity"
+                formControlName="city"
+              />
+            </div>
+            <div class="mb-3 ms-2">
+              <label for="usrStreet" class="form-label">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                name="street"
+                id="usrStreet"
+                formControlName="street"
+              />
+            </div>
+            <div class="mb-3 ms-2">
+              <label for="userPostaCode" class="form-label">Postal code</label>
+              <input
+                type="number"
+                class="form-control"
+                name="postalCode"
+                id="userPostaCode"
+                formControlName="postalCode"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="image" class="form-lable">upload ur img</label>
+            <div>
+              <input type="file" (change)="getFile($event)" />
+              <!-- <input type="button" value="upload" (click)="upload()" /> -->
+            </div>
+            <br />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="password" class="form-lable">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="password"
+              formControlName="password"
+              [(ngModel)]="newUser.password"
+              [class.is-valid]="password?.valid"
+              [class.is-invalid]="password?.invalid"
+            />
+            <div
+              class="alert alert-danger"
+              [hidden]="password?.valid || password?.untouched"
+            >
+              <small *ngIf="password?.errors?.['required']"
+                >password is required</small
+              >
+              <small *ngIf="password?.errors?.['pattern']"
+                >password must be atleast 8 chachters</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mt-3 mb-3">
+            <label for="confirmPassword" class="form-lable"
+              >confirmPassword</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              name="confirmPassword"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              [(ngModel)]="newUser.confirmPassword"
+              pattern="{{ newUser.password }}"
+              [class.is-valid]="confirmPassword?.valid"
+              [class.is-invalid]="confirmPassword?.invalid"
+            />
+            <div
+              class="alert alert-danger"
+              [hidden]="confirmPassword?.valid || confirmPassword?.untouched"
+            >
+              <small *ngIf="confirmPassword?.errors?.['required']"
+                >rePassword is required</small
+              >
+              <small *ngIf="confirmPassword?.errors?.['pattern']"
+                >passwords must match</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <div id="aaaasd">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="buttonsubmit"
+              [disabled]="userFormGroup.invalid"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <!-- <h6 class="bg-info">{{ userFormGroup.value | json }}</h6> -->
+    </form>
+  </div>
+</div>

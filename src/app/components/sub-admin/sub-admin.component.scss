@@ -1,0 +1,134 @@
+#addNewUserBtn,#addNewUserBtn div{
+    // display: flex;
+    // justify-content: space-evenly;
+    margin: 20px;
+}
+i{
+  font-size: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+.table{
+  margin-top: 5%;
+}
+#aPagination{
+  cursor: pointer;
+}
+h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#searchh{
+  border-radius: 20px;
+}
+.details {
+    position: relative;
+  display: inline-block;
+  }
+  
+  .message {
+    position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 100px;
+  transform: translateX(-50%);
+  background-color:#333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  }
+  
+  .details:hover .message {
+    top: -50px;
+  opacity: 1;
+  visibility: visible;
+  }
+
+  .details2 {
+    position: relative;
+  display: inline-block;
+  }
+  
+  .message2 {
+    position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 100px;
+  transform: translateX(-50%);
+  background-color:#333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  }
+  
+  .details2:hover .message2 {
+    top: -50px;
+  opacity: 1;
+  visibility: visible;
+  }
+  
+  .center {
+    text-align: center;
+  }
+  
+
+  #i{
+    color: rgb(0, 172, 0);
+    font-weight: 500;
+  }
+  td{
+    font-weight: 600;
+    color: #333;
+  }
+  .btnd{
+    background-color: #232f3e;
+    color: #fff;
+  }
+  #searchIcon{
+    font-size: 15px;
+    display: inline;
+}
+#iconSort{
+  color: #ddd;
+}
+.iconSort {
+  position: relative;
+display: inline-block;
+}
+
+.message3 {
+  position: absolute;
+top: -30px;
+left: 50%;
+width: 100px;
+transform: translateX(-50%);
+background-color:#333;
+color: #fff;
+padding: 5px;
+border-radius: 5px;
+font-size: 12px;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease-in-out;
+}
+
+.iconSort:hover .message3 {
+  top: -50px;
+opacity: 1;
+visibility: visible;
+}
+#img{
+  border-radius: 50%;
+}
+li a {
+  cursor: pointer;
+}

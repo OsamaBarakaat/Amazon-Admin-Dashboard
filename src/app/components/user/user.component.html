@@ -1,0 +1,258 @@
+<div class="container">
+  <div class="row" *ngIf="errMessage">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+      <div class="alert alert-warning" role="alert">
+        <div class="row">
+          <div class="col">{{ errMessage }}</div>
+          <div class="col"></div>
+          <div class="col">
+            <i class="fa-regular fa-circle-xmark" (click)="close()"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="successMessage">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+      <div class="alert alert-success" role="alert">
+        <div class="row">
+          <div class="col">{{ successMessage }}</div>
+          <div class="col"></div>
+          <div class="col">
+            <i class="fa-regular fa-circle-xmark" (click)="close()"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <header>
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary"
+      style="background-color: #232f3e"
+    >
+      <div class="container-fluid">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/addNewUser']"
+              >Add New User <i class="fa-solid fa-user-plus"></i
+            ></a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/sub-admin']" class="nav-link">
+              admins/sub-admins <i class="fa-solid fa-user-secret"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="col-4">
+          <input
+            id="searchh"
+            class="form-control me-3"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            [(ngModel)]="searchValue"
+            (keyup.enter)="searchByName()"
+          />
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <div class="col-3">
+            <input
+              type="number"
+              id="limit"
+              [(ngModel)]="limit"
+              class="form-control"
+            />
+            <button
+              (click)="specifyLimit()"
+              class="btn btn-outline-primary mt-2"
+            >
+              Specify
+            </button>
+          </div>
+        </div>
+        <div class="co-3 iconSort" (click)="toggleIcon()">
+          <i
+            class="fa-solid fa-arrow-down-a-z"
+            *ngIf="isIcon1"
+            (click)="sortAZ()"
+            id="iconSort"
+          ></i>
+          <i
+            class="fa-solid fa-arrow-down-z-a"
+            *ngIf="!isIcon1"
+            (click)="sortZA()"
+            id="iconSort"
+          ></i>
+          <span class="message3">Sort by name</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- <div class="row m-1">
+    <div class="col-3">
+      <div class="btn-group dropend">
+        <button
+          type="button"
+          class="btn btn-outline-primary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Sort By name
+        </button>
+        <ul class="dropdown-menu">
+          <div>
+            <div class="row">
+              <i class="fa-solid fa-arrow-down-a-z" (click)="sortAZ()"></i>
+            </div>
+            <div class="row">
+              <i class="fa-solid fa-arrow-down-z-a" (click)="sortZA()"></i>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div>
+        <label for="limit">Specify the limit:</label>
+        <div class="col-1 m-3">
+          <input type="number" id="limit" [(ngModel)]="limit" />
+          <button (click)="specifyLimit()" class="btn btn-outline-primary mt-2">
+            Specify
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <table class="table">
+    <thead style="background-color: #ff9900">
+      <tr>
+        <th scope="col">Number</th>
+        <th scope="col">name</th>
+        <th scope="col">email</th>
+        <th scope="col">img</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of receivedUsrsList; let i = index">
+        <tr
+          [ngStyle]="{
+            'background-color': user.role == 'admin' ? 'white' : 'white',
+            color: user.role == 'admin' ? 'red' : 'black'
+          }"
+          [ngStyle]="{
+            'background-color': user.role == 'sub-admin' ? 'white' : 'white',
+            color: user.role == 'user' ? 'red' : 'black'
+          }"
+        >
+          <td id="i">{{ i + 1 }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <img
+              [src]="user.image"
+              alt=""
+              width="100"
+              height="100"
+              id="img"
+              BorderBox
+            />
+          </td>
+          <td>
+            <div class="details">
+              <i
+                id="add"
+                class="fa-solid fa-circle-info"
+                routerLink="/updateAndShow/{{ user._id }}"
+              ></i>
+              <span class="message">show user details</span>
+            </div>
+            <div class="details2">
+              <i
+                class="fa-solid fa-trash-can"
+                id="delete"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="deleteUser(user._id)"
+              ></i>
+              <span class="message2">Delete</span>
+            </div>
+            <!-- <div>
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Are you sure you want to delete that user ?
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        back
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        data-bs-dismiss="modal"
+                        (click)="deleteUser(user._id)"
+                      >
+                        yes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div class="row">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <button class="btn btnd" (click)="perv()" [disabled]="page == 1">
+            prev
+          </button>
+        </li>
+        <li class="page-item" *ngFor="let page of pages; let i = index">
+          <a class="page-link" (click)="setPage(i + 1)" id="aPagination">{{
+            i + 1
+          }}</a>
+        </li>
+        <li class="page-item">
+          <button
+            href="#"
+            class="btn btnd"
+            (click)="next()"
+            [disabled]="page == numOfPages"
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

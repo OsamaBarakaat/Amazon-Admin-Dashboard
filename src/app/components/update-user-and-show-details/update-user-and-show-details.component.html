@@ -1,0 +1,63 @@
+<div class="row"></div>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <div class="card text-center">
+      <div class="card-header">user Details</div>
+      <div class="card-body">
+        <img
+          src="{{ user?.image }}"
+          class="img-thumbnail"
+          alt="..."
+          id="imgOfUser"
+        />
+        <div>
+          <h4 class="card-title">username : {{ user?.name }}</h4>
+        </div>
+        <div id="data">
+          <label for=""><b>email:</b></label>
+          <p class="card-text">
+            {{ user?.email }}
+          </p>
+        </div>
+        <div id="data">
+          <label for=""><b>phone:</b></label>
+          <p class="card-text">
+            {{ user?.phone }}
+          </p>
+        </div>
+        <div id="data">
+          <label for=""><b>isActive:</b></label>
+          <p class="card-text">
+            {{ user?.isActive }}
+          </p>
+        </div>
+        <div id="data">
+          <label for=""><b>address:</b></label>
+          <div>city:</div>
+          <p class="card-text">
+            {{ user?.address?.city }}
+          </p>
+          <div>street:</div>
+          <p class="card-text">
+            {{ user?.address?.street }}
+          </p>
+          <div>postal code:</div>
+          <p class="card-text">
+            {{ user?.address?.postalCode }}
+          </p>
+        </div>
+        <div id="dataRole">
+          <label for=""><b>role:</b></label>
+          <p class="card-text">
+            {{ user?.role }}
+          </p>
+        </div>
+
+        <button class="btn btn-dark" (click)="goBack()">back</button>
+      </div>
+      <div class="card-footer text-body-secondary">{{ user?.updatedAt }}</div>
+    </div>
+  </div>
+  <div class="col-3"></div>
+</div>
